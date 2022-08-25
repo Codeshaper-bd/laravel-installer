@@ -3,6 +3,7 @@
 namespace RachidLaasri\LaravelInstaller\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\App;
 use RachidLaasri\LaravelInstaller\Helpers\MigrationsHelper;
 
 class CanUpdate
@@ -36,7 +37,9 @@ class CanUpdate
 
             case false:
             default:
-                abort(404);
+                App::environment('production') || App::environment('staging') ?
+                    abort(404) :
+                    abort(403, 'Already updated.');
                 break;
         }
 

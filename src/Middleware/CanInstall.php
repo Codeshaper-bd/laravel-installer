@@ -3,6 +3,7 @@
 namespace RachidLaasri\LaravelInstaller\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\App;
 use Redirect;
 
 class CanInstall
@@ -39,8 +40,11 @@ class CanInstall
 
                 case '404':
                 case 'default':
+
                 default:
-                    abort(404);
+                    App::environment('production') || App::environment('staging') ?
+                        abort(404) :
+                        abort(403, 'Already installed.');
                     break;
             }
         }
