@@ -48,6 +48,13 @@ class InstallHelperController extends Controller
                 ])->withInput();
             }
 
+            $verifiedLogFile = storage_path('verified');
+            $dateStamp = date('Y/m/d h:i:sa');
+            if (!file_exists($verifiedLogFile)) {
+                $message = trans('installer_messages.purchase_code.verified_msg').$dateStamp."\n";
+                file_put_contents($verifiedLogFile, $message);
+            }
+
             return view('vendor.installer.welcome');
         } catch (Exception $ex) {
             // print the error so the user knows what's wrong
