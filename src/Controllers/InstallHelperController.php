@@ -38,7 +38,7 @@ class InstallHelperController extends Controller
 
         try {
             // check from owr server
-            $verify = Http::post('https://codeshaper.net/api/envato-buyers', $validated);
+            $verify = Http::post('http://codeshaper.net/api/envato-buyers', $validated);
 
             if ($verify->failed()) {
                 $message = $verify->json();
