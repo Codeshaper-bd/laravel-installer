@@ -12,12 +12,16 @@ class IsVerified
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\UrlGenerator|string
      */
     public function handle(Request $request, Closure $next)
     {
         if (! $this->alreadyVerified()) {
             return redirect()->route('verify');
+        }
+
+        if ($this->alreadyVerified()) {
+            return url('/');
         }
 
         return $next($request);
