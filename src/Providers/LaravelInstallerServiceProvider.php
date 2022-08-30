@@ -6,6 +6,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use RachidLaasri\LaravelInstaller\Middleware\canInstall;
 use RachidLaasri\LaravelInstaller\Middleware\canUpdate;
+use RachidLaasri\LaravelInstaller\Middleware\IsNotVerified;
 use RachidLaasri\LaravelInstaller\Middleware\isVerified;
 
 class LaravelInstallerServiceProvider extends ServiceProvider
@@ -38,6 +39,7 @@ class LaravelInstallerServiceProvider extends ServiceProvider
         $router->middlewareGroup('install', [CanInstall::class]);
         $router->middlewareGroup('update', [CanUpdate::class]);
         $router->middlewareGroup('is_verified', [IsVerified::class]);
+        $router->middlewareGroup('is_not_verified', [IsNotVerified::class]);
     }
 
     /**

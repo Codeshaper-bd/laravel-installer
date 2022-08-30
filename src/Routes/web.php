@@ -5,9 +5,10 @@ use RachidLaasri\LaravelInstaller\Controllers\InstallHelperController;
 // verify
 Route::group([
     'prefix' => 'install',
-    'middleware' => ['web', 'install']
+    'middleware' => ['web', 'install', 'is_not_verified']
 ], function () {
-    Route::get('/', [InstallHelperController::class, 'getPurchaseCodeVerifyPage'])->name('verify');
+    Route::get('/', [InstallHelperController::class, 'getPurchaseCodeVerifyPage'])
+        ->name('verify');
     Route::post('verify', [InstallHelperController::class, 'verifyPurchaseCode'])->name('verifyPurchaseCode');
 });
 

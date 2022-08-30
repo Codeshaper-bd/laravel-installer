@@ -5,7 +5,7 @@ namespace RachidLaasri\LaravelInstaller\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsVerified
+class IsNotVerified
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,11 @@ class IsVerified
      */
     public function handle(Request $request, Closure $next)
     {
-        if (! $this->alreadyVerified()) {
-            return redirect()->route('verify');
+        if ($this->alreadyVerified()) {
+            return redirect('/');
         }
 
-        return $next($request);
+        return redirect()->route('verify');
     }
 
     /**
