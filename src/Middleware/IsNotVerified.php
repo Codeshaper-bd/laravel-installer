@@ -20,7 +20,7 @@ class IsNotVerified
             return redirect('/');
         }
 
-        return redirect()->route('verify');
+        return $next($request);
     }
 
     /**
