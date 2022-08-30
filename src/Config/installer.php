@@ -138,4 +138,6 @@ return [
     */
     'updaterEnabled' => 'true',
 
+    'site_url' => env('CODESHAPER_SITE_URL', 'codeshaper.net'),
+
 ];
