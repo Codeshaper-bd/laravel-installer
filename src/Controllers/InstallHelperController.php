@@ -38,19 +38,15 @@ class InstallHelperController extends Controller
 
         try {
             // check from owr server
-            $verify = Http::post('http://codeshaper.net/api/envato-buyers', $validated);
+            $verify = Http::acceptJson()->post('codeshaper-website.test/api/envato-buyers', $validated);
+
+            $response = $verify->json();
 
             if ($verify->failed()) {
-                $message = $verify->json();
-
-                return $message;
-
                 return back()->withErrors([
-                    'purchase_code' => $message,
+                    'purchase_code' => $response['message'],
                 ])->withInput();
             }
-
-            return $verify;
 
             $verifiedLogFile = storage_path('verified');
             $dateStamp = date('Y/m/d h:i:sa');
