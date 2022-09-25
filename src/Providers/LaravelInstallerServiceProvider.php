@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use RachidLaasri\LaravelInstaller\Middleware\canInstall;
 use RachidLaasri\LaravelInstaller\Middleware\canUpdate;
 use RachidLaasri\LaravelInstaller\Middleware\IsNotVerified;
-use RachidLaasri\LaravelInstaller\Middleware\isVerified;
+use RachidLaasri\LaravelInstaller\Middleware\IsVerified;
 use RachidLaasri\LaravelInstaller\Middleware\NeedToInstall;
 
 class LaravelInstallerServiceProvider extends ServiceProvider
