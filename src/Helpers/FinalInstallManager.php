@@ -34,6 +34,9 @@ class FinalInstallManager
         try {
             if (config('installer.final.key')) {
                 Artisan::call('key:generate', ['--force'=> true], $outputLog);
+                if (file_exists(config_path('jwt.php'))) {
+                    Artisan::call('jwt:secret', ['--force' => true], $outputLog);
+                }
             }
         } catch (Exception $e) {
             return static::response($e->getMessage(), $outputLog);
