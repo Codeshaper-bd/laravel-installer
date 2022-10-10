@@ -4,6 +4,7 @@ namespace RachidLaasri\LaravelInstaller\Helpers;
 
 use Exception;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class FinalInstallManager
@@ -34,9 +35,11 @@ class FinalInstallManager
         try {
             if (config('installer.final.key')) {
                 Artisan::call('key:generate', ['--force'=> true], $outputLog);
-                if (file_exists(config_path('jwt.php'))) {
-                    Artisan::call('jwt:secret', ['--force' => true], $outputLog);
-                }
+            }
+
+            if (file_exists(config_path('jwt.php'))) {
+                Artisan::call('jwt:secret', ['--force' => true], $outputLog);
+                Log::info('jwt:secret command run successfully');
             }
         } catch (Exception $e) {
             return static::response($e->getMessage(), $outputLog);
