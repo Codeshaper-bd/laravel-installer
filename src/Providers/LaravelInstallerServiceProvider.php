@@ -4,8 +4,8 @@ namespace RachidLaasri\LaravelInstaller\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use RachidLaasri\LaravelInstaller\Middleware\canInstall;
-use RachidLaasri\LaravelInstaller\Middleware\canUpdate;
+use RachidLaasri\LaravelInstaller\Middleware\CanInstall;
+use RachidLaasri\LaravelInstaller\Middleware\CanUpdate;
 use RachidLaasri\LaravelInstaller\Middleware\IsNotVerified;
 use RachidLaasri\LaravelInstaller\Middleware\IsVerified;
 use RachidLaasri\LaravelInstaller\Middleware\NeedToInstall;
