@@ -17,7 +17,7 @@ class IsNotVerified
     public function handle(Request $request, Closure $next)
     {
         if ($this->alreadyVerified()) {
-            return redirect('/');
+            return redirect()->route('LaravelInstaller::welcome');
         }
 
         return $next($request);
