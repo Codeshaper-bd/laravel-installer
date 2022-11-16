@@ -13,7 +13,7 @@ return [
     |
     */
     'core' => [
-        'minPhpVersion' => '7.0.0',
+        'minPhpVersion' => '8.0.2',
     ],
     'final' => [
         'key' => true,
@@ -139,5 +139,7 @@ return [
     'updaterEnabled' => 'true',
 
     'site_url' => env('CODESHAPER_SITE_URL', 'https://codeshaper.net'),
+
+    'is_environment_wizard_enabled' => env('CODESHAPER_ENVIRONMENT_WIZARD_ENABLED', true),
 
 ];
