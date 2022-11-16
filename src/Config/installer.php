@@ -142,4 +142,6 @@ return [
 
     'is_environment_wizard_enabled' => env('CODESHAPER_ENVIRONMENT_WIZARD_ENABLED', true),
 
+    'item_id' => env('CODESHAPER_ITEM_ID'),
+
 ];

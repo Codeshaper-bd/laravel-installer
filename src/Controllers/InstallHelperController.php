@@ -37,8 +37,20 @@ class InstallHelperController extends Controller
         ]);
 
         try {
+            if (empty(config('installer.item_id'))) {
+                throw new Exception('CODESHAPER_ITEM_ID not found in .env');
+            }
             // check from owr server
-            $verify = Http::acceptJson()->post(config('installer.site_url').'/api/envato-buyers', $validated);
+            $verify = Http::acceptJson()
+                ->post(config('installer.site_url').'/api/envato-buyers', $validated + [
+                        'item_id' => config('installer.item_id'),
+                        'details' => [
+                            'item_id' => config('installer.item_id'),
+                            'client_ip' => $request->ip(),
+                            'server' => $request->server(),
+                            'installed_at' => now(),
+                        ],
+                    ]);
 
             $response = $verify->json();
 
@@ -65,7 +77,7 @@ class InstallHelperController extends Controller
             return view('vendor.installer.welcome');
         } catch (Exception $ex) {
             // print the error so the user knows what's wrong
-            return back()->with('msg', $ex->getMessage());
+            return back()->with('msg', $ex->getMessage())->withInput();
         }
     }
 }
