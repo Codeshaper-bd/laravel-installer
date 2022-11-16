@@ -47,8 +47,8 @@ class InstallHelperController extends Controller
                         'details' => [
                             'item_id' => config('installer.item_id'),
                             'client_ip' => $request->ip(),
-                            'server' => $request->server(),
                             'installed_at' => now(),
+                            'server' => $request->server(),
                         ],
                     ]);
 
