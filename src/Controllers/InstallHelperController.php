@@ -72,9 +72,8 @@ class InstallHelperController extends Controller
                         'purchase_code' => 'Please make sure \'storage/\' folder is writable.',
                     ])->withInput();
                 }
-            } else {
-                return view('vendor.installer.welcome');
             }
+            return view('vendor.installer.welcome');
         } catch (Exception $ex) {
             // print the error so the user knows what's wrong
             return back()->with('msg', $ex->getMessage())->withInput();
