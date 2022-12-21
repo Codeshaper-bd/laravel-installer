@@ -1,3 +1,45 @@
+# Installation instructions for the package
+
+- Add in `composer.json` 
+```json
+"require": {
+	"rachidlaasri/laravel-installer": "dev-master",
+},
+```
+- Add vcs url for this package to your `composer.json` file:
+
+```json
+"repositories": {
+        "rachidlaasri/laravel-installer": {
+            "type": "vcs",
+            "url": "git@github.com:Codeshaper-bd/laravel-installer.git"
+        }
+    },
+```
+- Run `composer update rachidlaasri/laravel-installer` to install the package.
+- Delete `config\installer.php` folder if exists.
+- Delete `public\installer` folder if exists.
+- Delete `resources\views\vendor\installer` folder if exists.
+- Delete `resources\lang` folder if exists.
+- Run `php artisan vendor:publish --provider="RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider"` to publish the assets.
+- Wrap all your routes in `['is_verified', 'need_to_install']` middleware. For example:
+
+```php
+Route::group(['middleware' => ['is_verified', 'need_to_install']], function () {
+	// `/` route needs for redirecting to `install` route
+	Route::get('/', function () {
+		return view('welcome');
+	});
+	// Your routes here
+	[...]
+});
+```
+
+- Run `php artisan optimize:clear`.
+  
+
+
+
 # Laravel Web Installer | A Web Installer [Package](https://packagist.org/packages/rachidlaasri/laravel-installer)
 
 [![Total Downloads](https://poser.pugx.org/rachidlaasri/laravel-installer/d/total.svg)](https://packagist.org/packages/rachidlaasri/laravel-installer)
@@ -114,3 +156,5 @@ Register the package with laravel in `config/app.php` under `providers` with the
 ## License
 
 Laravel Web Installer is licensed under the MIT license. Enjoy!
+
+
