@@ -14,7 +14,18 @@ return [
     'forms' => [
         'errorTitle' => 'The Following errors occurred:',
     ],
-
+    'purchase_code' => [
+        'templateTitle' => 'Verify Your Purchase Code',
+        'title' => 'Verify Purchase Code',
+        'buyer_name' => 'Name',
+        'buyer_name_placeholder' => 'Enter your name',
+        'buyer_email' => 'Email',
+        'buyer_email_placeholder' => 'Enter your email',
+        'code' => 'Envato Purchase Code',
+        'code_placeholder' => 'Enter your envato purchase code',
+        'verified_msg' => 'Purchase code verified successfully ',
+        'next' => 'Verify & Install',
+    ],
     /*
      *
      * Home page translations.
