@@ -2,13 +2,15 @@
 
 namespace RachidLaasri\LaravelInstaller\Controllers;
 
-use App\Models\Account;
 use App\Models\Client;
-use App\Models\GeneralSetting;
+use App\Models\Account;
 use App\Models\VatRate;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\GeneralSetting;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
+use Jackiedo\DotenvEditor\Facades\DotenvEditor;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RachidLaasri\LaravelInstaller\Helpers\DatabaseManager;
 use RachidLaasri\LaravelInstaller\Helpers\InstalledFileManager;
 
@@ -44,11 +46,15 @@ class UpdateController extends Controller
             $defaultClientSlug = GeneralSetting::where('key', 'default_client_slug')->firstOrFail();
             $defaultVatRateSlug = GeneralSetting::where('key', 'default_vat_rate_slug')->firstOrFail();
 
-            return view('vendor.installer.update.overview',
-                ['numberOfUpdatesPending' => count($migrations) - count($dbMigrations)]);
+            return view(
+                'vendor.installer.update.overview',
+                ['numberOfUpdatesPending' => count($migrations) - count($dbMigrations)]
+            );
         } catch (ModelNotFoundException $exception) {
-            return view('vendor.installer.update.overview',
-                ['numberOfUpdatesPending' => count($migrations) - count($dbMigrations) + 4]);
+            return view(
+                'vendor.installer.update.overview',
+                ['numberOfUpdatesPending' => count($migrations) - count($dbMigrations) + 4]
+            );
         }
 
         // static 3 for defult seeded rows
@@ -64,6 +70,16 @@ class UpdateController extends Controller
         $databaseManager = new DatabaseManager;
         $response = $databaseManager->migrateAndSeed();
 
+        $versionFilePath = public_path('version.txt');
+        if (file_exists($versionFilePath)) {
+            $updatedVersion = file_get_contents($versionFilePath);
+        }
+
+        // update to version 4.0.6
+        if ($updatedVersion == '4.0.6') {
+            $this->version4_0_6($updatedVersion);
+        }
+
         // default seed data for the application
         $this->defaultSeedData();
 
@@ -77,6 +93,7 @@ class UpdateController extends Controller
      */
     public function defaultSeedData()
     {
+        return "from seed";
         // Default account seed in the database
         Account::updateOrCreate(
             ['account_number' => 'CASH-0001', 'slug' => 'cash-0001'],
@@ -90,7 +107,8 @@ class UpdateController extends Controller
                 'updated_at' => now(),
                 'date' => now(),
                 'note' => null,
-            ]);
+            ]
+        );
         // Default client seed in the database
         Client::updateOrCreate(
             ['slug' => 'walking-customer', 'name' => 'Walking Customer'],
@@ -102,7 +120,8 @@ class UpdateController extends Controller
                 'status' => '1',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]);
+            ]
+        );
         // Default vat-rate seed in the database
         VatRate::updateOrCreate(
             ['slug' => 'vat-0', 'code' => 'VAT@0'],
@@ -111,7 +130,8 @@ class UpdateController extends Controller
                 'slug' => 'vat-0',
                 'code' => 'VAT@0',
                 'rate' => '0.00',
-            ]);
+            ]
+        );
         // Default info seed in general settings
         GeneralSetting::updateOrCreate(
             ['key' => 'default_client_slug', 'display_name' => 'Default Client Slug', 'value' => 'walking-customer'],
@@ -138,5 +158,13 @@ class UpdateController extends Controller
         $fileManager->update();
 
         return view('vendor.installer.update.finished');
+    }
+
+    public function version4_0_6($updatedVersion)
+    {
+        $editor = DotenvEditor::load();
+        $currentAppVersion =  $editor->getKey('APP_VERSION')['value'];
+        $editor->setKey('APP_VERSION', $updatedVersion);
+        $editor->save();
     }
 }
