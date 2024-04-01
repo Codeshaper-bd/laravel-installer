@@ -93,7 +93,6 @@ class UpdateController extends Controller
      */
     public function defaultSeedData()
     {
-        return "from seed";
         // Default account seed in the database
         Account::updateOrCreate(
             ['account_number' => 'CASH-0001', 'slug' => 'cash-0001'],
