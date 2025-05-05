@@ -51,7 +51,7 @@ class DatabaseManager
     private function seed(BufferedOutput $outputLog)
     {
         try {
-            Artisan::call('db:seed', ['--force' => true], $outputLog);
+            Artisan::call('db:seed', ['--class' => 'ProductionSeeder','--force' => true], $outputLog);
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
