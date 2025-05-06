@@ -101,3 +101,19 @@ Route::group([
         'uses' => 'UpdateController@finish',
     ]);
 });
+
+
+Route::get('/installer/login-redirect', function () {
+    $user = \App\Models\User::first();
+
+    if ($user) {
+        \Illuminate\Support\Facades\Auth::login($user);
+
+        // Manually regenerate session to persist login
+        request()->session()->regenerate();
+
+        return redirect()->route('settings.store-settings.edit');
+    }
+
+    abort(404, 'No user found to log in.');
+})->middleware('web')->name('installer.login-redirect');

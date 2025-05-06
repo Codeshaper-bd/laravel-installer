@@ -94,13 +94,14 @@ class EnvironmentController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors($validator->errors());
+            $tab = $this->getTabFromErrors($validator->errors());
+            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors($validator->errors())->with('activeTab', $tab);
         }
 
         if (! $this->checkDatabaseConnection($request)) {
             return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors([
                 'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
-            ]);
+            ])->with('activeTab', 2);
         }
 
         $results = $this->EnvironmentManager->saveFileWizard($request);
@@ -153,5 +154,24 @@ class EnvironmentController extends Controller
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    protected function getTabFromErrors($errors)
+    {
+        $tabFields = [
+            1 => ['app_name', 'app_url'], // fields of tab 1
+            2 => ['database_connection', 'database_name', 'database_username', 'database_password'], // tab 2
+            3 => ['admin_name', 'admin_email', 'admin_password'], // tab 3
+        ];
+
+        foreach ($tabFields as $tab => $fields) {
+            foreach ($fields as $field) {
+                if ($errors->has($field)) {
+                    return $tab;
+                }
+            }
+        }
+
+        return 1;
     }
 }

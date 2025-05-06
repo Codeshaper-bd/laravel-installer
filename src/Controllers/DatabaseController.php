@@ -37,17 +37,18 @@ class DatabaseController extends Controller
 
         $response = $this->databaseManager->migrateAndSeed();
 
-        $this->saveGeneralSettings($appName);
+        $this->saveGeneralSettings($appName, $adminEmail);
         $this->updateSuperAdminCredentials($adminName, $adminEmail, $adminPassword);
 
         return redirect()->route('LaravelInstaller::final')
             ->with(['message' => $response]);
     }
 
-    private function saveGeneralSettings(string $appName): void
+    private function saveGeneralSettings(string $appName, string $adminEmail): void
     {
         $settings = new GeneralSettings();
         $settings->name = $appName;
+        $settings->email = $adminEmail;
         $settings->save();
     }
 

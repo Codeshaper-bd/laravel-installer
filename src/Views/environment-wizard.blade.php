@@ -12,21 +12,21 @@
 @section('container')
     <div class="tabs tabs-full">
 
-        <input id="tab1" type="radio" name="tabs" class="tab-input" checked />
+        <input id="tab1" type="radio" name="tabs" class="tab-input" {{ session('activeTab', 1) == 1 ? 'checked' : '' }} />
         <label for="tab1" class="tab-label">
             <i class="fa fa-cog fa-2x fa-fw" aria-hidden="true"></i>
             <br />
             {{ trans('installer_messages.environment.wizard.tabs.environment') }}
         </label>
 
-        <input id="tab2" type="radio" name="tabs" class="tab-input" />
+        <input id="tab2" type="radio" name="tabs" class="tab-input" {{ session('activeTab') == 2 ? 'checked' : '' }} />
         <label for="tab2" class="tab-label">
             <i class="fa fa-database fa-2x fa-fw" aria-hidden="true"></i>
             <br />
             {{ trans('installer_messages.environment.wizard.tabs.database') }}
         </label>
 
-        <input id="tab3" type="radio" name="tabs" class="tab-input" />
+        <input id="tab3" type="radio" name="tabs" class="tab-input" {{ session('activeTab') == 3 ? 'checked' : '' }} />
         <label for="tab3" class="tab-label">
             <i class="fa fa-user fa-2x fa-fw" aria-hidden="true"></i>
             <br />
@@ -42,7 +42,7 @@
                     <label for="app_name">
                         {{ trans('installer_messages.environment.wizard.form.app_name_label') }}
                     </label>
-                    <input type="text" name="app_name" id="app_name" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.app_name_placeholder') }}" />
+                    <input type="text" name="app_name" id="app_name" value="{{ old('app_name') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_name_placeholder') }}" />
                     @if ($errors->has('app_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -74,7 +74,7 @@
                     <label for="app_url">
                         {{ trans('installer_messages.environment.wizard.form.app_url_label') }}
                     </label>
-                    <input type="url" name="app_url" id="app_url" value="https://yourdomain.com" placeholder="{{ trans('installer_messages.environment.wizard.form.app_url_placeholder') }}" />
+                    <input type="url" name="app_url" id="app_url" value="{{ old('app_url', 'https://yourdomain.com') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_url_placeholder') }}" />
                     @if ($errors->has('app_url'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -137,7 +137,7 @@
                     <label for="database_name">
                         {{ trans('installer_messages.environment.wizard.form.db_name_label') }}
                     </label>
-                    <input type="text" name="database_name" id="database_name" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.db_name_placeholder') }}" />
+                    <input type="text" name="database_name" id="database_name" value="{{ old('database_name') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_name_placeholder') }}" />
                     @if ($errors->has('database_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -150,7 +150,7 @@
                     <label for="database_username">
                         {{ trans('installer_messages.environment.wizard.form.db_username_label') }}
                     </label>
-                    <input type="text" name="database_username" id="database_username" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.db_username_placeholder') }}" />
+                    <input type="text" name="database_username" id="database_username" value="{{ old('database_username') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_username_placeholder') }}" />
                     @if ($errors->has('database_username'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -163,7 +163,7 @@
                     <label for="database_password">
                         {{ trans('installer_messages.environment.wizard.form.db_password_label') }}
                     </label>
-                    <input type="password" name="database_password" id="database_password" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.db_password_placeholder') }}" />
+                    <input type="password" name="database_password" id="database_password" value="{{ old('database_password') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_password_placeholder') }}" />
                     @if ($errors->has('database_password'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -184,7 +184,7 @@
                     <label for="admin_name">
                         {{ trans('installer_messages.environment.wizard.form.admin_name_label') }}
                     </label>
-                    <input type="text" name="admin_name" id="admin_name" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.admin_name_placeholder') }}" />
+                    <input type="text" name="admin_name" id="admin_name" value="{{ old('admin_name') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.admin_name_placeholder') }}" />
                     @if ($errors->has('admin_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -197,7 +197,7 @@
                     <label for="admin_email">
                         {{ trans('installer_messages.environment.wizard.form.admin_email_label') }}
                     </label>
-                    <input type="text" name="admin_email" id="admin_email" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.admin_email_placeholder') }}" />
+                    <input type="text" name="admin_email" id="admin_email" value="{{ old('admin_email') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.admin_email_placeholder') }}" />
                     @if ($errors->has('admin_email'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -210,7 +210,7 @@
                     <label for="admin_password">
                         {{ trans('installer_messages.environment.wizard.form.admin_password_label') }}
                     </label>
-                    <input type="password" name="admin_password" id="admin_password" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.admin_password_placeholder') }}" />
+                    <input type="password" name="admin_password" id="admin_password" value="{{ old('admin_password') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.admin_password_placeholder') }}" />
                     @if ($errors->has('admin_password'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -223,7 +223,7 @@
                     <label for="admin_password_confirmation">
                         {{ trans('installer_messages.environment.wizard.form.admin_password_confirm_label') }}
                     </label>
-                    <input type="password" name="admin_password_confirmation" id="admin_password_confirmation" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.admin_password_confirm_placeholder') }}" />
+                    <input type="password" name="admin_password_confirmation" id="admin_password_confirmation" value="{{ old('admin_password_confirmation') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.admin_password_confirm_placeholder') }}" />
                     @if ($errors->has('admin_password_confirmation'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
