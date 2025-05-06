@@ -34,7 +34,7 @@ class DatabaseManager
     private function migrate(BufferedOutput $outputLog)
     {
         try {
-            Artisan::call('migrate', ['--force'=> true], $outputLog);
+            Artisan::call('migrate', ['--force' => true], $outputLog);
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
@@ -51,7 +51,7 @@ class DatabaseManager
     private function seed(BufferedOutput $outputLog)
     {
         try {
-            Artisan::call('db:seed', ['--class' => 'ProductionSeeder','--force' => true], $outputLog);
+            Artisan::call('db:seed', ['--class' => 'ProductionSeeder', '--force' => true], $outputLog);
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
@@ -89,7 +89,7 @@ class DatabaseManager
                 touch($database);
                 DB::reconnect(Config::get('database.default'));
             }
-            $outputLog->write('Using SqlLite database: '.$database, 1);
+            $outputLog->write('Using SqlLite database: ' . $database, 1);
         }
     }
 }

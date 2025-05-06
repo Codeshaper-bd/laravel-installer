@@ -74,7 +74,7 @@ class EnvironmentController extends Controller
         event(new EnvironmentSaved($input));
 
         return $redirect->route('LaravelInstaller::environmentClassic')
-                        ->with(['message' => $message]);
+            ->with(['message' => $message]);
     }
 
     /**
@@ -107,8 +107,12 @@ class EnvironmentController extends Controller
 
         event(new EnvironmentSaved($request));
 
-        return $redirect->route('LaravelInstaller::database')
-                        ->with(['results' => $results]);
+        return $redirect->route('LaravelInstaller::database', [
+            'app_name' => $request->input('app_name'),
+            'admin_name' => $request->input('admin_name'),
+            'admin_email' => $request->input('admin_email'),
+            'admin_password' => $request->input('admin_password'),
+        ])->with(['results' => $results]);
     }
 
     /**

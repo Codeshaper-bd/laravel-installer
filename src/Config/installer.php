@@ -13,7 +13,7 @@ return [
     |
     */
     'core' => [
-        'minPhpVersion' => '8.0.2',
+        'minPhpVersion' => '8.2',
     ],
     'final' => [
         'key' => true,
@@ -70,6 +70,10 @@ return [
                 'database_name'         => 'required|string|max:50',
                 'database_username'     => 'required|string|max:50',
                 'database_password'     => 'nullable|string|max:50',
+                'admin_name'            => 'required|string|max:50',
+                'admin_email'           => 'required|email|max:50',
+                'admin_password'        => 'required|string|min:6|max:50',
+                'admin_password'        => 'required|string|min:6|max:50|confirmed',
             ],
         ],
     ],
