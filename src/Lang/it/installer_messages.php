@@ -6,7 +6,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Laravel Installer',
+    'title' => 'COSMOS Installer',
     'next' => 'Passo successivo',
     'finish' => 'Installa',
     /*
