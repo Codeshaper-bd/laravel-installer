@@ -4,7 +4,6 @@ namespace RachidLaasri\LaravelInstaller\Controllers;
 
 use Illuminate\Routing\Controller;
 use RachidLaasri\LaravelInstaller\Helpers\DatabaseManager;
-use App\Settings\GeneralSettings;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -37,24 +36,15 @@ class DatabaseController extends Controller
 
         $response = $this->databaseManager->migrateAndSeed();
 
-        $this->saveGeneralSettings($appName, $adminEmail);
         $this->updateSuperAdminCredentials($adminName, $adminEmail, $adminPassword);
 
         return redirect()->route('LaravelInstaller::final')
             ->with(['message' => $response]);
     }
 
-    private function saveGeneralSettings(string $appName, string $adminEmail): void
-    {
-        $settings = new GeneralSettings();
-        $settings->name = $appName;
-        $settings->email = $adminEmail;
-        $settings->save();
-    }
-
     private function updateSuperAdminCredentials(string $name, string $email, string $password): void
     {
-        $superAdmin = User::role('super-admin')->first();
+        $superAdmin = User::where('account_role', 1)->first();
 
         if ($superAdmin) {
             $superAdmin->name = $name;
@@ -62,10 +52,10 @@ class DatabaseController extends Controller
             $superAdmin->password = Hash::make($password);
             $superAdmin->save();
 
-            if ($superAdmin->contact) {
-                $superAdmin->contact->display_name = $name;
-                $superAdmin->contact->save();
-            }
+            // if ($superAdmin->contact) {
+            //     $superAdmin->contact->display_name = $name;
+            //     $superAdmin->contact->save();
+            // }
         }
     }
 }
