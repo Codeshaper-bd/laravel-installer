@@ -29,7 +29,6 @@ class DatabaseController extends Controller
      */
     public function database()
     {
-        $appName = request()->query('app_name');
         $adminEmail = request()->query('admin_email');
         $adminName = request()->query('admin_name');
         $adminPassword = request()->query('admin_password');

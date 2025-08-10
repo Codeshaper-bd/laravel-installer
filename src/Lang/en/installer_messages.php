@@ -7,7 +7,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'COSMOS Installer',
+    'title' => 'Acculance Installer',
     'next' => 'Next Step',
     'back' => 'Previous',
     'finish' => 'Install',
@@ -33,7 +33,7 @@ return [
      */
     'welcome' => [
         'templateTitle' => 'Welcome',
-        'title'   => 'COSMOS Installer',
+        'title'   => 'Acculance Installer',
         'message' => 'Easy Installation and Setup Wizard.',
         'next'    => 'Check Requirements',
     ],
@@ -196,7 +196,7 @@ return [
      *
      */
     'installed' => [
-        'success_log_message' => 'COSMOS Installer successfully INSTALLED on ',
+        'success_log_message' => 'Acculance Installer successfully INSTALLED on ',
     ],
 
     /*
@@ -261,7 +261,7 @@ return [
         ],
 
         'log' => [
-            'success_message' => 'COSMOS Installer successfully UPDATED on ',
+            'success_message' => 'Acculance Installer successfully UPDATED on ',
         ],
     ],
 ];

@@ -7,7 +7,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'COSMOS Installer',
+    'title' => 'Acculance Installer',
     'next' => 'Selanjutnya',
     'back' => 'Kembali',
     'finish' => 'Pasang',
@@ -22,7 +22,7 @@ return [
      */
     'welcome' => [
         'templateTitle' => 'Selamat Datang',
-        'title'   => 'COSMOS Installer',
+        'title'   => 'Acculance Installer',
         'message' => 'Instalasi Mudah dan Persiapan Aplikasi',
         'next'    => 'Cek Kebutuhan',
     ],
@@ -175,7 +175,7 @@ return [
      *
      */
     'installed' => [
-        'success_log_message' => 'COSMOS Installer berhasil DIPASANG pada ',
+        'success_log_message' => 'Acculance Installer berhasil DIPASANG pada ',
     ],
 
     /*
@@ -240,7 +240,7 @@ return [
         ],
 
         'log' => [
-            'success_message' => 'COSMOS Installer berhasil DIPERBARUI pada ',
+            'success_message' => 'Acculance Installer berhasil DIPERBARUI pada ',
         ],
     ],
 ];
