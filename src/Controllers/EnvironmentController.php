@@ -87,9 +87,7 @@ class EnvironmentController extends Controller
     public function saveWizard(Request $request, Redirector $redirect)
     {
         $rules = config('installer.environment.form.rules');
-        $messages = [
-            'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required'),
-        ];
+        $messages = config('installer.environment.form.messages');
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
