@@ -33,7 +33,7 @@ class EnvironmentController extends Controller
      */
     public function environmentMenu()
     {
-        return view('vendor.installer.environment');
+        return view('vendor.installer.environment-wizard');
     }
 
     /**
