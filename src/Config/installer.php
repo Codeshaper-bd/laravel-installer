@@ -88,6 +88,7 @@ return [
                 'admin_email.email'             => 'Please enter a valid email address.',
                 'admin_password.required'       => 'Please enter the admin password.',
                 'admin_password.confirmed'      => 'Password confirmation does not match.',
+                'admin_password.min'            => 'Password must be at least 6 characters.',
             ],
         ],
     ],
