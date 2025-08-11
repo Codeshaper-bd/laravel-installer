@@ -50,11 +50,6 @@ class DatabaseController extends Controller
             $superAdmin->email = $email;
             $superAdmin->password = Hash::make($password);
             $superAdmin->save();
-
-            // if ($superAdmin->contact) {
-            //     $superAdmin->contact->display_name = $name;
-            //     $superAdmin->contact->save();
-            // }
         }
     }
 }
