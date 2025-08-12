@@ -49,35 +49,6 @@ class EnvironmentController extends Controller
     }
 
     /**
-     * Display the Environment page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function environmentClassic()
-    {
-        $envConfig = $this->EnvironmentManager->getEnvContent();
-
-        return view('vendor.installer.environment-classic', compact('envConfig'));
-    }
-
-    /**
-     * Processes the newly saved environment configuration (Classic).
-     *
-     * @param Request $input
-     * @param Redirector $redirect
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function saveClassic(Request $input, Redirector $redirect)
-    {
-        $message = $this->EnvironmentManager->saveFileClassic($input);
-
-        event(new EnvironmentSaved($input));
-
-        return $redirect->route('LaravelInstaller::environmentClassic')
-            ->with(['message' => $message]);
-    }
-
-    /**
      * Processes the newly saved environment configuration (Form Wizard).
      *
      * @param Request $request
