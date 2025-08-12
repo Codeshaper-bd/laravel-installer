@@ -31,7 +31,7 @@
 .form-section {
     margin: 0;
     padding: 12px;
-    border-bottom: 1px solid #e1e5e9;
+    border-bottom: none;
     background: #fff;
 }
 .form-section:first-child { border-top-left-radius: 8px; border-top-right-radius: 8px; }
@@ -44,8 +44,7 @@
     color: #2c3e50;
     display: flex;
     align-items: center;
-    padding-bottom: 6px;
-    border-bottom: 2px solid #e1e5e9;
+    padding-bottom: 0;
 }
 .section-title i { margin-right: 10px; color: #5a6c7d; font-size: 18px; }
 
