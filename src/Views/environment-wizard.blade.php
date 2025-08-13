@@ -169,7 +169,6 @@
                 <select name="environment" id="environment" onchange='checkEnvironment(this.value);'>
                     <option value="local">{{ trans('installer_messages.environment.wizard.form.app_environment_label_local') }}</option>
                     <option value="production" selected>{{ trans('installer_messages.environment.wizard.form.app_environment_label_production') }}</option>
-                    <option value="other">Other</option>
                 </select>
                 <div id="environment_text_input" style="display: none;">
                     <input type="text" name="environment_custom" id="environment_custom" placeholder="{{ trans('installer_messages.environment.wizard.form.app_environment_placeholder_other') }}"/>
