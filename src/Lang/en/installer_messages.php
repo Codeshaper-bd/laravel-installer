@@ -7,7 +7,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Acculance Installer',
+    'title' => 'Acculance Saas Installer',
     'next' => 'Next Step',
     'back' => 'Previous',
     'finish' => 'Install',
@@ -33,7 +33,7 @@ return [
      */
     'welcome' => [
         'templateTitle' => 'Welcome',
-        'title'   => 'Acculance Installer',
+        'title'   => 'Acculance Saas Installer',
         'message' => 'Easy Installation and Setup Wizard.',
         'next'    => 'Check Requirements',
     ],
@@ -133,7 +133,7 @@ return [
      *
      */
     'installed' => [
-        'success_log_message' => 'Acculance Installer successfully INSTALLED on ',
+        'success_log_message' => 'Acculance Saas Installer successfully INSTALLED on ',
     ],
 
     /*
@@ -198,7 +198,7 @@ return [
         ],
 
         'log' => [
-            'success_message' => 'Acculance Installer successfully UPDATED on ',
+            'success_message' => 'Acculance Saas Installer successfully UPDATED on ',
         ],
     ],
 ];

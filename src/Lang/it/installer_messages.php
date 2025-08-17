@@ -6,7 +6,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Acculance Installer',
+    'title' => 'Acculance Saas Installer',
     'next' => 'Passo successivo',
     'finish' => 'Installa',
     /*

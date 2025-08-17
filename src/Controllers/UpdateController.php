@@ -97,7 +97,7 @@ class UpdateController extends Controller
             [
                 'name' => 'Walking Customer',
                 'slug' => 'walking-customer',
-                'email' => 'acculance@example.com',
+                'email' => 'acculancesaas@example.com',
                 'phone' => '017000000',
                 'status' => '1',
                 'created_at' => now(),

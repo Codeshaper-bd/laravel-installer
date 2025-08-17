@@ -7,7 +7,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Acculance Installer',
+    'title' => 'Acculance Saas Installer',
     'next' => 'Nächster Schritt',
     'finish' => 'Installieren',
 
