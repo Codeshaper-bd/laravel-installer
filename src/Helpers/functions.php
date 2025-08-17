@@ -21,36 +21,3 @@ if (! function_exists('isActive')) {
         }
     }
 }
-
-if (! function_exists('getCurrentDomain')) {
-    /**
-     * Get the current domain from the request.
-     *
-     * @return string
-     */
-    function getCurrentDomain()
-    {
-        $url = request()->url();
-        $domain = parse_url($url, PHP_URL_HOST);
-        return $domain ?: 'localhost';
-    }
-}
-
-if (! function_exists('generateTenantDatabaseName')) {
-    /**
-     * Generate tenant database name based on prefix and domain.
-     *
-     * @param  string $prefix
-     * @param  string $domain
-     * @return string
-     */
-    function generateTenantDatabaseName($prefix, $domain = null)
-    {
-        if (!$domain) {
-            $domain = getCurrentDomain();
-        }
-        
-        $cleanDomain = preg_replace('/[^a-zA-Z0-9]/', '_', $domain);
-        return $prefix . $cleanDomain;
-    }
-}

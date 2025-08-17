@@ -145,7 +145,6 @@
 <form method="post" action="{{ route('LaravelInstaller::environmentSaveWizard') }}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="app_url" id="app_url" value="">
-    <input type="hidden" name="central_domain" id="central_domain" value="">
     
     <div class="form-container">
         <div class="form-section">
@@ -199,17 +198,6 @@
                 @endif
             </div>
             
-            <div class="form-group {{ $errors->has('tenant_db_prefix') ? ' has-error ' : '' }}">
-                <label for="tenant_db_prefix">{{ trans('installer_messages.environment.wizard.form.tenant_db_prefix_label') }}</label>
-                <input type="text" name="tenant_db_prefix" id="tenant_db_prefix" value="{{ old('tenant_db_prefix', 'acculance_saas_') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.tenant_db_prefix_placeholder') }}" />
-                @if ($errors->has('tenant_db_prefix'))
-                    <span class="error-block">
-                        <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                        {{ $errors->first('tenant_db_prefix') }}
-                    </span>
-                @endif
-            </div>
-            
             <div id="mysql_fields" class="database-fields">
                 <div class="form-group {{ $errors->has('database_hostname') ? ' has-error ' : '' }}">
                     <label for="database_hostname">{{ trans('installer_messages.environment.wizard.form.db_host_label') }}</label>
@@ -236,8 +224,7 @@
             
             <div class="form-group {{ $errors->has('database_name') ? ' has-error ' : '' }}">
                 <label for="database_name">{{ trans('installer_messages.environment.wizard.form.db_name_label') }}</label>
-                <input type="text" name="database_name" id="database_name" value="{{ old('database_name') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_name_placeholder') }}" readonly style="background-color: #f9fafb; cursor: not-allowed;" />
-                <small style="color: #6b7280; font-size: 12px; margin-top: 2px; display: block;">Auto-generated based on domain and prefix</small>
+                <input type="text" name="database_name" id="database_name" value="{{ old('database_name') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_name_placeholder') }}" />
                 @if ($errors->has('database_name'))
                     <span class="error-block">
                         <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -341,20 +328,6 @@
             return window.location.protocol + "//" + window.location.host;
         }
 
-        function getDomainFromURL() {
-            const url = getCurrentURL();
-            const domain = url.replace(/^https?:\/\//, '').replace(/:\d+$/, '');
-            return domain;
-        }
-
-        function generateDatabaseName() {
-            const prefix = document.getElementById('tenant_db_prefix').value || 'acculance_saas_';
-            const domain = getDomainFromURL();
-            const cleanDomain = domain.replace(/[^a-zA-Z0-9]/g, '_');
-            const dbName = prefix + cleanDomain;
-            document.getElementById('database_name').value = dbName;
-        }
-
         function showLoading() {
             const button = document.getElementById('submitButton');
             const buttonText = button.querySelector('.button-text');
@@ -370,23 +343,12 @@
             element.style.display = val === 'other' ? 'block' : 'none';
         }
 
-        function checkDatabaseConnection(val) {
-            // Existing database connection logic if any
-        }
-
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('app_url').value = getCurrentURL();
-            document.getElementById('central_domain').value = getDomainFromURL();
-            generateDatabaseName();
-            
-            // Add event listener for tenant_db_prefix changes
-            document.getElementById('tenant_db_prefix').addEventListener('input', generateDatabaseName);
         });
 
         document.querySelector('form').addEventListener('submit', function(e) {
             document.getElementById('app_url').value = getCurrentURL();
-            document.getElementById('central_domain').value = getDomainFromURL();
-            generateDatabaseName();
             showLoading();
         });
 </script>

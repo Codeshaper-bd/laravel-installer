@@ -59,8 +59,7 @@ class EnvironmentController extends Controller
     {
         $rules = config('installer.environment.form.rules');
         $messages = [
-            'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required'),
-            'tenant_db_prefix.regex' => trans('installer_messages.environment.wizard.form.tenant_db_prefix_regex_error'),
+            'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required')
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -131,8 +130,8 @@ class EnvironmentController extends Controller
     protected function getTabFromErrors($errors)
     {
         $tabFields = [
-            1 => ['app_name', 'app_url', 'central_domain'], // fields of tab 1
-            2 => ['database_connection', 'tenant_db_prefix', 'database_name', 'database_username', 'database_password'], // tab 2
+            1 => ['app_name', 'app_url'], // fields of tab 1
+            2 => ['database_connection', 'database_name', 'database_username', 'database_password'], // tab 2
             3 => ['admin_name', 'admin_email', 'admin_password'], // tab 3
         ];
 
