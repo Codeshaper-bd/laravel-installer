@@ -145,6 +145,7 @@
 <form method="post" action="{{ route('LaravelInstaller::environmentSaveWizard') }}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="app_url" id="app_url" value="">
+    <input type="hidden" name="central_domain" id="central_domain" value="">
     
     <div class="form-container">
         <div class="form-section">
@@ -327,6 +328,14 @@
         function getCurrentURL() {
             return window.location.protocol + "//" + window.location.host;
         }
+        
+        function extractDomain(url) {
+            let domain = url.replace(/^https?:\/\//, '');
+            domain = domain.replace(/\/$/, '');
+            domain = domain.replace(/^www\./, '');
+            
+            return domain;
+        }
 
         function showLoading() {
             const button = document.getElementById('submitButton');
@@ -344,11 +353,15 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('app_url').value = getCurrentURL();
+            const currentUrl = getCurrentURL();
+            document.getElementById('app_url').value = currentUrl;
+            document.getElementById('central_domain').value = extractDomain(currentUrl);
         });
 
         document.querySelector('form').addEventListener('submit', function(e) {
-            document.getElementById('app_url').value = getCurrentURL();
+            const currentUrl = getCurrentURL();
+            document.getElementById('app_url').value = currentUrl;
+            document.getElementById('central_domain').value = extractDomain(currentUrl);
             showLoading();
         });
 </script>
