@@ -10,7 +10,7 @@
 - Add in `composer.json`
 ```json
 "require": {
-	"rachidlaasri/laravel-installer": "dev-master",
+	"rachidlaasri/laravel-installer": "dev-master", // choose which branch do you need
 },
 ```
 - Add vcs url for this package to your `composer.json` file:
@@ -23,11 +23,12 @@
         }
     },
 ```
-- Run `composer update rachidlaasri/laravel-installer` to install the package.
 - Delete `config\installer.php` folder if exists.
 - Delete `public\installer` folder if exists.
-- Delete `resources\views\vendor\installer` folder if exists.
 - Delete `resources\lang` folder if exists.
+- Delete `resources\views\vendor\installer` folder if exists.
+- Delete `vendor\rachidlaasri` folder if exists.
+- Run `composer update rachidlaasri/laravel-installer` to install the package.
 - Run `php artisan vendor:publish --provider="RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider"` to publish the assets.
 - Wrap all your routes in `['is_verified', 'need_to_install']` middleware. For example:
 
