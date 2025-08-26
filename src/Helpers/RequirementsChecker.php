@@ -109,6 +109,26 @@ class RequirementsChecker
      */
     protected function getMinPhpVersion()
     {
-        return $this->_minPhpVersion;
+        $composerPhpVersion = $this->getComposerPhpVersion();
+        return $composerPhpVersion ?? $this->_minPhpVersion;
+    }
+
+    protected function getComposerPhpVersion(): ?string
+    {
+        $composerPath = base_path('composer.json');
+
+        if (!file_exists($composerPath)) {
+            return null;
+        }
+
+        $composer = json_decode(file_get_contents($composerPath), true);
+
+        if (isset($composer['require']['php'])) {
+            // Extract minimum version from ^8.0.2, >=8.0, etc.
+            preg_match('/\d+\.\d+(\.\d+)?/', $composer['require']['php'], $matches);
+            return $matches[0] ?? null;
+        }
+
+        return null;
     }
 }

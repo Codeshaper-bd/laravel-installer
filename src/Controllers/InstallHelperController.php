@@ -3,6 +3,7 @@
 namespace RachidLaasri\LaravelInstaller\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class InstallHelperController extends Controller
 {
+    use ValidatesRequests;
     /**
      * Display the purchase code verify page.
      *
